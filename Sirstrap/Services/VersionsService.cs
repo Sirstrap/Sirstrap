@@ -10,10 +10,10 @@ namespace Sirstrap.Services
 {
     public static class VersionsService
     {
-        private static readonly HttpClient _httpClient = new()
+        private static readonly HttpService _httpService = new(new HttpClient()
         {
             Timeout = TimeSpan.FromMinutes(5)
-        };
+        });
 
         public static async Task<bool> SetVersionAsync()
         {
@@ -51,7 +51,7 @@ namespace Sirstrap.Services
 
         private static async Task<JsonDocument> GetJsonDocumentAsync()
         {
-            return JsonDocument.Parse(await _httpClient.GetStringAsync("https://clientsettingscdn.roblox.com/v1/client-version/WindowsPlayer"));
+            return JsonDocument.Parse(await _httpService.GetStringAsync("https://clientsettingscdn.roblox.com/v1/client-version/WindowsPlayer", 5));
         }
 
         private static void CreateDirectoryIfNotExists(string path)
