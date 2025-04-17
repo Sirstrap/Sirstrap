@@ -1,5 +1,4 @@
-﻿using Sirstrap.Enums;
-using Sirstrap.Models;
+﻿using Sirstrap.Models;
 using System;
 using System.IO;
 using System.Linq;
@@ -36,7 +35,7 @@ namespace Sirstrap.Services
         {
             try
             {
-                if (DownloadConfiguration.BinaryType.Equals(BinaryType.WindowsPlayer))
+                if (DownloadConfiguration.BinaryType.Equals("WindowsPlayer"))
                 {
                     JsonDocument jsonDocument = await GetJsonDocumentAsync();
 
