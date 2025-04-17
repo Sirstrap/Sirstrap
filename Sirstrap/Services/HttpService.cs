@@ -7,7 +7,7 @@ namespace Sirstrap.Services
 {
     public class HttpService(HttpClient httpClient)
     {
-        private HttpClient _httpClient = httpClient;
+        private readonly HttpClient _httpClient = httpClient;
 
         public async Task<string> GetStringAsync(string url, int attempts)
         {
