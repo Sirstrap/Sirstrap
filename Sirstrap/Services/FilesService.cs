@@ -11,7 +11,8 @@ namespace Sirstrap.Services
         {
             try
             {
-                CreateDirectoryIfNotExists(Directories.SirstrapFiles);
+                CreateDirectoryIfNotExists(Directories.SelfUpdateCache);
+                CreateDirectoryIfNotExists(Directories.RobloxUpdateCache);
                 CreateFileIfNotExists(Paths.SirstrapConfiguration);
                 CreateFileIfNotExists(Paths.SirstrapLog);
             }
@@ -23,7 +24,19 @@ namespace Sirstrap.Services
         private static void CreateDirectoryIfNotExists(string path)
         {
             if (!Directory.Exists(path))
+            {
                 Directory.CreateDirectory(path);
+            }
+            else
+            {
+                DirectoryInfo directoryInfo = new(path);
+
+                foreach (FileInfo file in directoryInfo.GetFiles())
+                    file.Delete();
+
+                foreach (DirectoryInfo directory in directoryInfo.GetDirectories())
+                    directory.Delete(true);
+            }
 
             return;
         }
@@ -38,7 +51,8 @@ namespace Sirstrap.Services
 
         private static bool CreateFilesSuccess()
         {
-            return Directory.Exists(Directories.SirstrapFiles) &&
+            return Directory.Exists(Directories.SelfUpdateCache) &&
+                Directory.Exists(Directories.RobloxUpdateCache) &&
                 File.Exists(Paths.SirstrapConfiguration) &&
                 File.Exists(Paths.SirstrapLog);
         }
