@@ -8,6 +8,6 @@ namespace Sirstrap.Services
 {
     public static class DownloadConfigurationService
     {
-
+        // TODO: Sirstrap is Windows only for the moment :)
     }
 }
